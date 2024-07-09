@@ -1,0 +1,76 @@
+{
+    "torres": [
+        {
+            "id": "T1",
+            "nome": "Torre dos Guri",
+            "endereco": "Rua Camelon ribeiro, 55"
+        },
+        {
+            "id": "T2",
+            "nome": "Torre das Guria",
+            "endereco": "Rua macarone cabel, 200"
+        }
+    ],
+    "apartamentos": [
+        {
+            "id": "Vintem",
+            "numero_apartamento": 06,
+            "torre_id": "T1"
+        },
+        {
+            "id": "kennedy",
+            "numero_apartamento": 08,
+            "torre_id": "T1"
+        },
+        {
+            "id": "43",
+            "numero_apartamento": 12,
+            "torre_id": "T1"
+        },
+        {
+            "id": "jacarezinho",
+            "numero_apartamento": 123,
+            "torre_id": "T1"
+        },
+        {
+            "id": "dende",
+            "numero_apartamento": 204,
+            "torre_id": "T1"
+        },
+        {
+            "id": "pavuna",
+            "numero_apartamento": 523,
+            "torre_id": "T2"
+        },
+        {
+            "id": "quadradin",
+            "numero_apartamento": 31,
+            "torre_id": "T2"
+        },
+        {
+            "id": "jundia",
+            "numero_apartamento": 9634,
+            "torre_id": "T2"
+        },
+        {
+            "id": "isa",
+            "numero_apartamento": 184,
+            "torre_id": "T2"
+        },
+        {
+            "id": "centro",
+            "numero_apartamento": 49,
+            "torre_id": "T2"
+        },
+        {
+            "id": "aliança",
+            "numero_apartamento": 69,
+            "torre_id": "T1"
+        },
+        {
+            "id": "penha",
+            "numero_apartamento": 3154,
+            "torre_id": "T2"
+        }
+    ]
+}

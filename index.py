@@ -1,3 +1,5 @@
+import json
+
 class Torre:
     def __init__(self, id, nome, endereco):
         self.id = id
@@ -22,10 +24,11 @@ class FilaDeEspera:
         self.fila.append(apartamento)
 
     def retirar_apartamento(self, numero_vaga):
-        for apartamento in self.fila:
-            if apartamento.numero_vaga_garagem == numero_vaga:
-                self.fila.remove(apartamento)
-                return apartamento
+        if self.fila:
+            apto = self.fila[0]
+            del self.fila[0]
+            apto.numero_vaga_garagem = numero_vaga
+            return apto
         return None
 
     def imprimir_fila(self):
@@ -33,8 +36,8 @@ class FilaDeEspera:
             print("A fila de espera está vazia.")
         else:
             print("Fila de espera:")
-            for apartamento in self.fila:
-                print(apartamento)
+            for apto in self.fila:
+                print(apto)
 
 class ListaApartamentosComVaga:
     def __init__(self):
@@ -45,9 +48,11 @@ class ListaApartamentosComVaga:
         self.apartamentos.sort(key=lambda x: x.numero_vaga_garagem)
 
     def liberar_vaga(self, numero_vaga):
-        for i, apartamento in enumerate(self.apartamentos):
-            if apartamento.numero_vaga_garagem == numero_vaga:
-                return self.apartamentos.pop(i)
+        for i, apto in enumerate(self.apartamentos):
+            if apto.numero_vaga_garagem == numero_vaga:
+                apto_liberado = self.apartamentos[i]
+                del self.apartamentos[i]
+                return apto_liberado
         return None
 
     def imprimir_lista(self):
@@ -55,8 +60,8 @@ class ListaApartamentosComVaga:
             print("Não há apartamentos com vaga de garagem.")
         else:
             print("Apartamentos com vaga de garagem:")
-            for apartamento in self.apartamentos:
-                print(apartamento)
+            for apto in self.apartamentos:
+                print(apto)
 
 class Condominio:
     def __init__(self, max_vagas=10):
@@ -80,12 +85,11 @@ class Condominio:
         if apto_liberado:
             apto_liberado.numero_vaga_garagem = None
             self.fila_espera.adicionar_apartamento(apto_liberado)
-
             apto_da_fila = self.fila_espera.retirar_apartamento(numero_vaga)
             if apto_da_fila:
                 self.lista_vagas.adicionar_apartamento(apto_da_fila)
-            else:
-                print("Vaga não encontrada.")
+        else:
+            print("Vaga não encontrada.")
 
     def imprimir_lista_vagas(self):
         self.lista_vagas.imprimir_lista()
@@ -101,13 +105,11 @@ def carregar_dados_iniciais(filepath='dados_iniciais.json'):
         condominio = Condominio()
         torres_dict = {}
 
-        # Adicionar torres
         for torre_data in dados["torres"]:
             torre = Torre(torre_data["id"], torre_data["nome"], torre_data["endereco"])
             condominio.adicionar_torre(torre)
             torres_dict[torre.id] = torre
 
-        # Cadastrar apartamentos
         for apt_data in dados["apartamentos"]:
             torre = torres_dict[apt_data["torre_id"]]
             apartamento = Apartamento(apt_data["id"], apt_data["numero_apartamento"], torre)
